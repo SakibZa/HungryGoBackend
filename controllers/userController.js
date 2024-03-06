@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const SECRET_KEY = "ASKARIZAIDI"
 module.exports.signup = async (req, res) => {
   try {
     const isUserExist = await User.findOne({ email: req.body.email });
@@ -45,7 +46,7 @@ module.exports.login = async (req, res) => {
         msg: "Incorrect Password",
       });
     }
-    const token = jwt.sign({id: user.id}, process.env.SECRET_KEY , {expiresIn: '1h'}) 
+    const token = jwt.sign({id: user.id}, SECRET_KEY , {expiresIn: '1h'}) 
     return res.json(200, {
       msg: "User Logged in",
       success: true,
