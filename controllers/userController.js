@@ -7,6 +7,7 @@ module.exports.signup = async (req, res) => {
     if (isUserExist) {
       return res.status(400).json({
         success: false,
+        msg:"user already exist"
       });
     }
     const salt = await bcrypt.genSalt(10);
